@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Your Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #e8d5f2 0%, #c5a8d9 50%, #a88bbd 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Envelope Container */
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 2 / 1.4;
+            perspective: 1000px;
+            z-index: 10;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.6s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.02);
+        }
+
+        /* Envelope parts */
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4b5e8 0%, #c5a8d9 100%);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(147, 112, 177, 0.4);
+        }
+
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flap-top {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #e8d5f2 0%, #d4b5e8 100%);
+            transform-origin: top center;
+            transition: transform 1s ease;
+            border-radius: 0 0 10px 10px;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            z-index: 3;
+        }
+
+        .flap-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #c5a8d9 0%, #b399c9 100%);
+            border-radius: 0 0 10px 10px;
+            z-index: 1;
+        }
+
+        .flap-left, .flap-right {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4b5e8 0%, #c5a8d9 100%);
+            transition: transform 1s ease 0.3s;
+            z-index: 2;
+        }
+
+        .flap-left {
+            left: 0;
+            transform-origin: left center;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
+
+        .flap-right {
+            right: 0;
+            transform-origin: right center;
+            clip-path: polygon(100% 0, 0 50%, 100% 100%);
+        }
+
+        /* Heart seal - now using image */
+        .heart-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            z-index: 4;
+            transition: all 0.8s ease;
+        }
+
+        .heart-seal img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+           /* filter: drop-shadow(0 5px 20px rgba(253,177,240,0.941)); */
+        }
+
+        /* Click to open text */
+        .click-text {
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #6b4c7a;
+            font-size: 18px;
+            font-style: italic;
+            z-index: 5;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Opened state */
+        .envelope-wrapper.opened .flap-top {
+            transform: rotateX(-180deg);
+        }
+
+        .envelope-wrapper.opened .flap-left {
+            transform: rotateY(-180deg);
+        }
+
+        .envelope-wrapper.opened .flap-right {
+            transform: rotateY(180deg);
+        }
+
+        .envelope-wrapper.opened .heart-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .envelope-wrapper.opened .click-text {
+            opacity: 0;
+        }
+
+        .envelope-wrapper.opened {
+            animation: moveUpAndRedirect 1.5s ease forwards 1s;
+        }
+
+        @keyframes moveUpAndRedirect {
+            to {
+                transform: translateY(-150%);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .envelope-wrapper {
+                max-width: 400px;
+            }
+
+            .heart-seal {
+                width: 80px;
+                height: 80px;
+            }
+
+            .click-text {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .envelope-wrapper {
+                max-width: 300px;
+            }
+
+            .heart-seal {
+                width: 150px;
+                height: 150px;
+            }
+
+            .click-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Envelope -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope" id="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-front">
+                <div class="flap-bottom"></div>
+                <div class="flap-left"></div>
+                <div class="flap-right"></div>
+                <div class="flap-top"></div>
+                <div class="heart-seal">
+                    <!-- Replace 'heart.png' with your actual heart image path -->
+                    <img src="sanrio.png" alt="Heart Seal">
+                </div>
+            </div>
+        </div>
+        <div class="click-text">click to open</div>
+    </div>
+
+    <script>
+        const envelope = document.getElementById('envelope');
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+
+        envelope.addEventListener('click', function() {
+            envelopeWrapper.classList.add('opened');
+            
+            // Disable clicking after opened
+            envelope.style.pointerEvents = 'none';
+            
+            // Redirect to letter page after animation completes (2.5 seconds)
+            setTimeout(function() {
+                window.location.href = 'letter.html';
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
