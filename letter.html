@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #e8d5f2 0%, #c5a8d9 50%, #a88bbd 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Notebook lines background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 25px,
+                rgba(147, 112, 177, 0.15) 25px,
+                rgba(147, 112, 177, 0.15) 26px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(147, 112, 177, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .photo-header {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .letter-content {
+            padding: 40px;
+            line-height: 26px;
+            color: #4a3555;
+        }
+        
+        b {
+          color: #4a3555db;
+        }
+        
+        u {
+          text-decoration-color: #4a35555c;
+        }
+
+        .letter-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: #6b4c7a;
+            font-weight: 600;
+            text-decoration: underline #bc9cc6b7;
+        }
+
+        .letter-content p {
+            margin-bottom: 26px;
+            text-align: justify;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 40px;
+            color: #7d5c8f;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            body::before {
+                background-image: repeating-linear-gradient(
+                    transparent,
+                    transparent 22px,
+                    rgba(147, 112, 177, 0.15) 22px,
+                    rgba(147, 112, 177, 0.15) 23px
+                );
+            }
+
+            .letter-content {
+                padding: 30px 25px;
+                line-height: 23px;
+            }
+
+            .letter-content h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .letter-content p {
+                margin-bottom: 23px;
+                font-size: 15px;
+            }
+            
+            .photo-header {
+                height: 200px;
+            }
+
+            .signature {
+                margin-top: 26px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            body::before {
+                background-image: repeating-linear-gradient(
+                    transparent,
+                    transparent 20px,
+                    rgba(147, 112, 177, 0.15) 20px,
+                    rgba(147, 112, 177, 0.15) 21px
+                );
+            }
+
+            .letter-card {
+                border-radius: 15px;
+            }
+
+            .letter-content {
+                padding: 25px 20px;
+                line-height: 21px;
+            }
+
+            .letter-content h1 {
+                font-size: 22px;
+                margin-bottom: 18px;
+            }
+
+            .letter-content p {
+                margin-bottom: 21px;
+                font-size: 14px;
+            }
+
+            .photo-header {
+                height: 150px;
+            }
+
+            .signature {
+                margin-top: 23px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="letter-card">
+            <img src="photo2.jpeg" 
+                 alt="Purple twilight landscape" 
+                 class="photo-header">
+            
+            <div class="letter-content">
+                <h1>hello <br> to my baby <br> soheng °ᥫ᭡,</h1>
+                
+                <p>
+                    i hope you're doing good padin po litel baby love, it's okay po to rest saglit po if you feel like needed mo na, don't ever feel guilty magpahinga or sa pag ddistract sa self ng saks lang because para din yun sa'yo. 
+                </p>
+                
+                <p>
+                    kaya pa po ba baby? look lang po sa tasks bit by bit muna and <i>not as a whole</i>, na parang 'yung lahat-lahat need na iserve. i know naman po na kakayanin padin in the end but i just want to make sure na you're sane enough padin even if sobrang daming dapat paghandaan and gawin. look sa positive side po baby kahit parang hindi na bright ang kinabukasan kasi so cooked na. hindi po kailangang agad-agad, if kaya namang dahan-dahanin, isa-isahin. 'wag po magpapatalo — you're more than what you think and see, alam ko kasi i believe in you.
+                </p>
+                
+                <p>
+                    mahirap po ang finals but after nun uwian naman na sa magda, kay pregy chana, kay luca, kay naldjen. may end din po ang school works kahit papa'no, and i trust you naman po baby love na malalampasan mo sila. hindi din po kailangan maging best, enough na po ang magsurvive, mas bet ko po na magsurvive ang baby ko kasi achievement naman na yun palang. 
+                </p>
+                
+                <p> <u>thank you po for your efforts always, and for trying.</u> You're appreciated by that na already. magddecember nadin po and infairness malayo-layo nadin po ang natiis ng baby ko, proud pussycat po here! <i>ang owner is si sohe.</i> padayon po hanggat hindi pa natin nakukuha yung mga deserve natin, sa dinami-dami ba naman ng paghihirap. mahal po kita palagi, my palagi. 
+                </p>
+                
+                <div class="signature">
+                    1 </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="letter-card">
+            <img src="photo1.jpeg" 
+                 alt="Purple twilight landscape" 
+                 class="photo-header">
+            
+            <div class="letter-content">
+              <h1>survived <br> another <br> month .ᐟ <br><br> (december 1st)</h1>
+              
+              <p><i>“malayo na, pero wtf bakit kasi malayo pa???”</i> it's a wrap po baby, ang masasabi ko lang ay <b>***#@*</b> po. kung ang mama ko po ay maawain, <b><i>bakit ang college ay hindi? </i></b> malapit na magtapos ang 1st sem baby love, after ng mga 'to pwede na huminga ng maluwag sa pasko. and ayoko po muna mag-english kasi mabbother lang ako kung may mali ba sa grahams.</p>
+              
+              <p>gusto ko lang po matapos na ang mga school works ng baby ko ng hindi s'ya nab-burn out mala bollywood scene. i understand na very essential po sa baby ko ang magcry sa hirap but kasi... fine po. </p>
+              
+              <p>before po matapos ang finals sa isang bangsakan ng mga deadlines, gusto ko lamang pong sabihin sa baby soheng ko na <b>super proud po ako sa'yo.</b> kahit natype ko na kanina sa taas, and nalulungkot at the same time kasi ang over ng finals :< ako nalang ang nahihiya sa ginagawa n'ya sa palangga ko, tampalin ko 'yan eh. :< tsaka sorry po here sa site simple lang s'ya, batay kasi sa forecast po <u>simplicity is beauty ᡣ𐭩.</u> gusto ko po sana beast pero hindi pa ako magaling sa coding, malandi lang sa'yo kaso bawal pala hindi ko naman alam walang memo pinadala sa'kin kaya medyo lang.</p>
+              
+              <p>anyways, hope ang colors here ay goods lang po sa eyes ni baby.</p>
+              
+                              <div class="signature">
+                    2 </div>
+            </div>
+          </div>
+        </div>
+        
+ <br>
+        
+            <div class="container">
+        <div class="letter-card">
+            <img src="photo3.jpeg" 
+                 alt="Purple twilight landscape" 
+                 class="photo-header">
+            
+            <div class="letter-content">
+              <h1>dearest sweetheart ۶۟ৎ,</h1>
+              
+              <p> ——  na sino pa ba? edi si you po, <br> ang one and only  ———  ༝༚༝༚<br><br>
+             sleep tightly po and sleep well. sasabak na naman mamaya sa another hell week ang plumpkin, kaya good luck po ng many many times because additionally, even if morning lang ang pasok bukas is baka iba naman sa hapon ang ganap XD and i couldn't even imagine ang kakapoy. padayon love, kakayanin.</p>
+             
+             <p><b>i love you po, palangga!</b><br> pag-amping kanunay, <br> for me.</p>
+             
+                             <div class="signature">
+                    with warmth and devotion, <br> charger</div>
+            </div>
+</body>
+</html>
